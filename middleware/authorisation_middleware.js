@@ -1,5 +1,5 @@
 function authRedirect(req, res, next) {
-    if (req.session.user) {
+    if (req.user) {
         return res.redirect("/dashboard");
     }
 
@@ -7,7 +7,7 @@ function authRedirect(req, res, next) {
 }
 
 function authorise(req, res, next) {
-    if (req.session.user) {
+    if (req.user) {
         return next();
     }
 

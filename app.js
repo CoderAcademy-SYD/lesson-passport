@@ -24,6 +24,10 @@ app.use(express.json());
 
 app.use(morgan("combined"));
 
+const passport = require("./config/passport");
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(require("./routes"));
 
 app.use(express.static("public"));

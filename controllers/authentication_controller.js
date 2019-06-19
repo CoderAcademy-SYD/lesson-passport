@@ -4,17 +4,22 @@ function registerNew(req, res) {
     res.render("authentication/register");
 }
 
-async function registerCreate(req, res) {
+async function registerCreate(req, res, next) {
     const { email, password } = req.body;
     const user = await UserModel.create({ email, password });
-    req.session.user = user;
-    res.redirect("/dashboard");
+    
+    req.login(user, (error) => {
+        if (error) {
+            return next(error);
+        }
+
+        return res.redirect("/dashboard");
+    });
 }
 
 function logout(req, res) {
-    req.session.destroy(() => {
-        res.redirect("/");
-    });
+    req.logout();
+    res.redirect("/");
 }
 
 function loginNew(req, res) {
