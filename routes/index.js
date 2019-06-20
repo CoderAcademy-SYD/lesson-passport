@@ -19,7 +19,7 @@ router.post("/register", celebrate({
     }
 }), AuthenticationController.registerCreate);
 
-router.get("/dashboard", authorise, PageController.dashboard);
+router.get("/dashboard", passport.authenticate("jwt", { session: false }), PageController.dashboard);
 
 router.get("/login", authRedirect, AuthenticationController.loginNew);
 

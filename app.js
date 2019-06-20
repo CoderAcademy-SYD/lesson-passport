@@ -4,10 +4,13 @@ const morgan = require("morgan");
 const expressSession = require("express-session");
 const MongoStore = require('connect-mongo')(expressSession);
 const mongoose = require('mongoose');
+const cookieParser = require("cookie-parser");
 const app = express();
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
+
+app.use(cookieParser());
 
 app.use(expressSession({
     secret: process.env.SESSION_SECRET,
