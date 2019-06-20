@@ -32,4 +32,8 @@ router.post("/login", celebrate({
     failureRedirect: "/login"
 }), AuthenticationController.loginCreate);
 
+router.get("/auth/googlelogin", passport.authenticate("google", { scope: ["email", "profile"]}));
+
+router.get("/auth/google", passport.authenticate("google"), AuthenticationController.loginCreate);
+
 module.exports = router;
